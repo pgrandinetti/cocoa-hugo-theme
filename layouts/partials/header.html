@@ -9,7 +9,7 @@
     <div class="container">
         <div class="content">
             {{ if .Site.Params.gravatar }}
-            <a {{ printf "href=%q" ("/" | relLangURL) | safeHTMLAttr }}><img class="avatar" src="https://gravatar.com/avatar/{{ .Site.Params.gravatar }}?s=50" rcset="https://gravatar.com/avatar/{{ .Site.Params.gravatar }}?s=100 2x, https://gravatar.com/avatar/{{ .Site.Params.gravatar }}?s=150 3x, https://gravatar.com/avatar/{{ .Site.Params.gravatar }}?s=200 4x"></a>
+            <a {{ printf "href=%q" ("/" | relLangURL) | safeHTMLAttr }}><img class="avatar" src="https://gravatar.com/avatar/{{ .Site.Params.gravatar }}?s=50" srcset="https://gravatar.com/avatar/{{ .Site.Params.gravatar }}?s=100 2x, https://gravatar.com/avatar/{{ .Site.Params.gravatar }}?s=150 3x, https://gravatar.com/avatar/{{ .Site.Params.gravatar }}?s=200 4x"></a>
             {{ else if .Site.Params.avatar }}
                 {{ $.Scratch.Add "srcset" (slice (printf "%s 1x" (.Site.Params.avatar|absURL))) }}
                 {{ $directory := replaceRE "^(.*)/[^/]+$" "$1" .Site.Params.avatar }}
@@ -21,7 +21,7 @@
                     {{ end }}
                 {{ end }}
                 {{ $srcset := delimit ($.Scratch.Get "srcset") "," }}
-                <a {{ printf "href=%q" ("/" | relLangURL) | safeHTMLAttr }}><img class="avatar" src="/{{ .Site.Params.avatar }}" {{ printf "srcset=%q" $srcset | safeHTMLAttr }}></a>
+                <a {{ printf "href=%q" ("/" | relLangURL) | safeHTMLAttr }}><img class="avatar" src="/{{ .Site.Params.avatar }}" alt="avatar" {{ printf "srcset=%q" $srcset | safeHTMLAttr }}></a>
             {{ end }}
             <a {{ printf "href=%q" ("/" | relLangURL) | safeHTMLAttr }}><div class="name">{{ .Site.Params.author }}</div></a>
             {{ if .Site.Params.selfintro }}
@@ -54,9 +54,9 @@
             <a href="{{ .Site.Params.twitter }}" target="_blank" rel="noopener"><img class="icon" src="/img/twitter.svg" alt="twitter" /></a>
         {{ end }}
 
-	{{ if .Site.Params.keybase }}
+        {{ if .Site.Params.keybase }}
             <a href="{{ .Site.Params.keybase }}" target="_blank" rel="noopener"><img class="icon" src="/img/keybase.svg" alt="keybase" /></a>
-	{{ end }}
+        {{ end }}
 
         {{ if .Site.Params.calendar }}
             <a href="{{ .Site.Params.calendar }}" target="_blank" rel="noopener"><img class="icon" src="/img/calendar.svg" alt="calendar" /></a>
@@ -104,7 +104,7 @@
 
         {{ if and .Site.Params.i18n_flags .IsTranslated }}
             {{ range .Translations }}
-                <a href="{{ .Permalink }}"><img class="icon flag" src="/img/flags/{{ .Lang }}.svg"></a>
+                <a href="{{ .Permalink }}"><img class="icon flag" src="/img/flags/{{ .Lang }}.svg" alt="{{ .Lang }} flag"></a>
             {{ end }}
         {{ end }}
         </div>
