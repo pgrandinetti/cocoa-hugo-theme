@@ -10,4 +10,7 @@
 </title>
 <link rel="canonical" href="{{ .Permalink }}">
 {{ partial "head_includes.html" . }}
+{{ if .Params.math }}
+    {{ partial "math_support.html" . }}
+{{ end }}
 </head>
